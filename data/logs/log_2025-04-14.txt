@@ -1,0 +1,4 @@
+### LOG DE EXECUÇÃO ###
+[14/04/2025 09:48:04] Gerando planilha...
+[14/04/2025 09:48:22] ✅ Planilha gerada com sucesso! 8 pessoas encontradas.
+[14/04/2025 09:48:28] Planilha gerada com sucesso.
