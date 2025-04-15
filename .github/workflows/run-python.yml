@@ -1,0 +1,26 @@
+name: Executar Script Python
+
+on:
+  push:
+    branches: [main]  # Ou a branch que quiser monitorar
+
+jobs:
+  executar:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar repositório
+        uses: actions/checkout@v3
+
+      - name: Configurar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'  # Pode trocar pela versão que quiser
+
+      - name: Instalar dependências
+        run: |
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Executar script
+        run: |
+          python services/whatsapp.py
