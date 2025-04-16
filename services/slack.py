@@ -6,7 +6,7 @@ from slack_sdk.errors import SlackApiError
 # === CONFIGURAÇÕES ==========================
 
 SLACK_TOKEN = os.getenv("SLACK_API_TOKEN")  # Vem do GitHub Secrets
-SLACK_CHANNEL = ("#testes")  # Pode definir também como secret se quiser
+SLACK_CHANNEL = ("C07LJHERK1T")  # Pode definir também como secret se quiser
 USER_ID = ("U07KPPR7SJW")  # Coloque seu ID como secret se quiser mensagens diretas
 PLANILHA_CAMINHO = "data/relatorio_efetivados.xlsx"
 
@@ -43,7 +43,7 @@ def enviar_planilha_para_slack():
 
         with open(PLANILHA_CAMINHO, "rb") as file_content:
             slack_client.files_upload_v2(
-                channel=SLACK_CHANNEL,
+                channel="C07LJHERK1T",
                 initial_comment="",
                 filename=os.path.basename(PLANILHA_CAMINHO),
                 file=file_content
