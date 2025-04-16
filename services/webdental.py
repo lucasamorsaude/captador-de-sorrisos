@@ -11,6 +11,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.keys import Keys
+from datetime import datetime, timedelta
 import urllib.parse
 from utils.logger import StatusLogger
 import traceback
@@ -27,7 +28,27 @@ logger = StatusLogger()
 log = logger.log
 
 
-def gerar_relatorio(data_inicio, data_fim):
+def gerar_relatorio(data_inicio=None, data_fim=None):
+    # Pega a data atual
+    hoje = datetime.today()
+    dia_da_semana = hoje.weekday()  # 0 = segunda, 1 = terça, ..., 5 = sexta, 6 = sábado, 7 = domingo
+
+    # Lógica para determinar data_inicio e data_fim
+    if dia_da_semana == 0:  # Segunda-feira
+        data_fim = hoje - timedelta(days=3)  # Sexta-feira
+        data_inicio = hoje - timedelta(days=2)  # Sábado
+    elif dia_da_semana in [1, 2, 3, 4]:  # De terça a sexta-feira
+        data_fim = hoje - timedelta(days=1)  # Ontem
+        data_inicio = hoje - timedelta(days=2)  # Anteontem
+    # Caso seja sábado ou domingo, não gera relatório
+    elif dia_da_semana in [5, 6]:  # Sábado ou Domingo
+        print("Não há relatório a ser gerado hoje. Esperando até segunda-feira.")
+        return
+
+    # Formatar as datas
+    data_inicio = data_inicio.strftime("%d/%m/%Y")
+    data_fim = data_fim.strftime("%d/%m/%Y")
+    
     print(f"🔄 Gerando relatório de {data_inicio} até {data_fim}...")
 
     profile_dir = os.path.abspath("whatsapp_profile")
