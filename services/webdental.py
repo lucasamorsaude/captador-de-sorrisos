@@ -95,7 +95,7 @@ def gerar_relatorio(data_inicio=None, data_fim=None):
 
         
 
-        print("🗓️Preenchendo datas...")
+        print("🗓️ Preenchendo datas...")
         WebDriverWait(driver, 10).until(
             EC.presence_of_element_located((By.ID, "dtini"))
         ).send_keys(formatar_data(data_inicio))
@@ -194,3 +194,5 @@ def url_mensagem_whatsapp(numero, mensagem):
     numero = "+55" + numero.replace("-", "").strip()
     mensagem = urllib.parse.quote(mensagem)
     return f"https://web.whatsapp.com/send?phone={numero}&text={mensagem}"
+
+gerar_relatorio()
