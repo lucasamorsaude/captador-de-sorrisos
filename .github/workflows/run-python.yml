@@ -23,4 +23,4 @@ jobs:
 
       - name: Executar script
         run: |
-          python services/webdental.py
+          python main.py
