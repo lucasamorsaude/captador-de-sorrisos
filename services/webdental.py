@@ -13,7 +13,6 @@ from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.keys import Keys
 from datetime import datetime, timedelta
 import urllib.parse
-from utils.logger import StatusLogger
 import traceback
 
 # Carregar configurações de login
@@ -23,9 +22,7 @@ with open("config.json", "r", encoding="utf-8") as f:
 USUARIO = config["usuario"]
 SENHA = config["senha"]
 
-logger = StatusLogger()
 
-log = logger.log
 
 
 def gerar_relatorio(data_inicio=None, data_fim=None):
@@ -167,7 +164,6 @@ Quer entender melhor? Aproveita esse momento para garantir o cuidado que você m
         df.to_excel(caminho_planilha, index=False)
 
         total_encontrados = len(dados)
-        log(f"✅ Planilha gerada com sucesso! {total_encontrados} pessoas encontradas.")
         print(f"✅ Planilha gerada com sucesso! {total_encontrados} pessoas encontradas.")
         return {
             "sucesso": True,
@@ -180,8 +176,6 @@ Quer entender melhor? Aproveita esse momento para garantir o cuidado que você m
         print("⏰ Timeout! A página demorou demais para responder.")
     except Exception as e:
     
-        log("🔥 Erro durante execução:")
-        log(str(traceback.format_exc()))
         return {
             "sucesso": False,
             "mensagem": "Erro ao gerar o relatório. Verifique os logs.",
