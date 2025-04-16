@@ -4,7 +4,6 @@
     "delay_envio": 5,
     "perfil_chrome": "whatsapp_profile",
     "caminho_excel": "relatorio_efetivados.xlsx",
-    "slack_token": "xoxb-7663173300518-7677399157159-fSZrjOjJs9inW3BXD1rk898u",
     "slack_channelt":"C08MDMJG70D",
     "slack_channel":"C07LJHERK1T"
 }

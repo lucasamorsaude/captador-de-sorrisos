@@ -1,18 +1,13 @@
 import os
 import pandas as pd
-import json
 from slack_sdk import WebClient
 from slack_sdk.errors import SlackApiError
 
 # === CONFIGURAÇÕES ==========================
 
-# Lê o config.json com token e canal Slack
-with open("config.json", "r", encoding="utf-8") as f:
-    config = json.load(f)
-
-SLACK_TOKEN = config.get("slack_token")
-SLACK_CHANNEL = config.get("slack_channel")  # Ex: "#geral"
-USER_ID = "U07KPPR7SJW"  # Seu ID para mensagens diretas
+SLACK_TOKEN = os.getenv("SLACK_API_TOKEN")  # Vem do GitHub Secrets
+SLACK_CHANNEL = ("C07LJHERK1T")  # Pode definir também como secret se quiser
+USER_ID = ("U07KPPR7SJW")  # Coloque seu ID como secret se quiser mensagens diretas
 PLANILHA_CAMINHO = "data/relatorio_efetivados.xlsx"
 
 # Cliente Slack
@@ -21,6 +16,10 @@ slack_client = WebClient(token=SLACK_TOKEN)
 # === FUNÇÃO PRINCIPAL =======================
 
 def enviar_planilha_para_slack():
+    if not SLACK_TOKEN:
+        print("❌ SLACK_API_TOKEN não encontrado nas variáveis de ambiente.")
+        return
+
     if not os.path.exists(PLANILHA_CAMINHO):
         print("❌ Planilha não encontrada.")
         return
@@ -55,10 +54,11 @@ def enviar_planilha_para_slack():
     except SlackApiError as e:
         erro = f"❌ Erro ao enviar para o Slack: {e.response['error']}"
         print(erro)
-        try:
-            slack_client.chat_postMessage(channel=USER_ID, text=erro)
-        except Exception as dm_erro:
-            print(f"⚠️ Também falhou ao tentar enviar a mensagem direta: {dm_erro}")
+        if USER_ID:
+            try:
+                slack_client.chat_postMessage(channel=USER_ID, text=erro)
+            except Exception as dm_erro:
+                print(f"⚠️ Também falhou ao tentar enviar a mensagem direta: {dm_erro}")
 
 # === EXECUÇÃO ================================
 

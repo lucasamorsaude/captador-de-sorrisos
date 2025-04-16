@@ -2,10 +2,8 @@ name: Executar Script Python
 
 on:
   schedule:
-    - cron: '0 15 * * *'  # Executa todos os dias às 12:15 UTC (09:15 no horário de Brasília)
-  workflow_dispatch:        # Permite execução manual também, se quiser
-  # push:
-  #   branches: [main]        # Opcional, caso queira continuar executando no push
+    - cron: '0 15 * * *'  # Executa todos os dias às 12:15 UTC (09:15 Brasília)
+  workflow_dispatch:
 
 jobs:
   executar:
@@ -18,12 +16,14 @@ jobs:
       - name: Configurar Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.12.1'  # Troque pela versão que preferir
+          python-version: '3.12.1'
 
       - name: Instalar dependências
         run: |
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
       - name: Executar script
+        env:
+          SLACK_API_TOKEN: ${{ secrets.SLACK_API_TOKEN }}
         run: |
           python main.py
