@@ -1,8 +1,11 @@
 name: Executar Script Python
 
 on:
+  schedule:
+    - cron: '15 12 * * *'  # Executa todos os dias às 12:15 UTC (09:15 no horário de Brasília)
+  workflow_dispatch:        # Permite execução manual também, se quiser
   push:
-    branches: [main]  # Ou a branch que quiser monitorar
+    branches: [main]        # Opcional, caso queira continuar executando no push
 
 jobs:
   executar:
@@ -15,7 +18,7 @@ jobs:
       - name: Configurar Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.12.1'  # Pode trocar pela versão que quiser
+          python-version: '3.12.1'  # Troque pela versão que preferir
 
       - name: Instalar dependências
         run: |
