@@ -32,11 +32,11 @@ def gerar_relatorio(data_inicio=None, data_fim=None):
 
     # Lógica para determinar data_inicio e data_fim
     if dia_da_semana == 0:  # Segunda-feira
-        data_fim = hoje - timedelta(days=3)  # Sexta-feira
-        data_inicio = hoje - timedelta(days=2)  # Sábado
+        data_fim = hoje - timedelta(days=2)  # Sexta-feira
+        data_inicio = hoje - timedelta(days=3)  # Sábado
     elif dia_da_semana in [1, 2, 3, 4]:  # De terça a sexta-feira
         data_fim = hoje - timedelta(days=1)  # Ontem
-        data_inicio = hoje - timedelta(days=2)  # Anteontem
+        data_inicio = hoje - timedelta(days=1)  # Anteontem
     # Caso seja sábado ou domingo, não gera relatório
     elif dia_da_semana in [5, 6]:  # Sábado ou Domingo
         print("Não há relatório a ser gerado hoje. Esperando até segunda-feira.")

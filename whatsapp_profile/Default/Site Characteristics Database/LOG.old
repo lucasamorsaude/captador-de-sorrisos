@@ -1,5 +1,1 @@
-2025/04/16-09:00:45.806 4eac Log #3: 42 ops saved to Table #4 OK
-2025/04/16-09:00:45.812 4eac Archiving C:\Users\DESKTOP\Desktop\COISAS ALEATÓRIAS\Programas PY\Captador de Sorrisos\whatsapp_profile\Default\Site Characteristics Database/000003.log: OK
-2025/04/16-09:00:45.813 4eac Table #4: 42 entries OK
-2025/04/16-09:00:45.814 4eac Archiving C:\Users\DESKTOP\Desktop\COISAS ALEATÓRIAS\Programas PY\Captador de Sorrisos\whatsapp_profile\Default\Site Characteristics Database/MANIFEST-000001: OK
-2025/04/16-09:00:45.828 4eac **** Repaired leveldb C:\Users\DESKTOP\Desktop\COISAS ALEATÓRIAS\Programas PY\Captador de Sorrisos\whatsapp_profile\Default\Site Characteristics Database; recovered 1 files; 878 bytes. Some data may have been lost. ****
+2025/04/16-09:00:45.832 4eac Reusing MANIFEST C:\Users\DESKTOP\Desktop\COISAS ALEATÓRIAS\Programas PY\Captador de Sorrisos\whatsapp_profile\Default\Site Characteristics Database/MANIFEST-000001
