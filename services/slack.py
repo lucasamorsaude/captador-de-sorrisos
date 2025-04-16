@@ -43,7 +43,7 @@ def enviar_planilha_para_slack():
 
         with open(PLANILHA_CAMINHO, "rb") as file_content:
             slack_client.files_upload_v2(
-                channel="C07LJHERK1T",
+                channel=SLACK_CHANNEL,
                 initial_comment="",
                 filename=os.path.basename(PLANILHA_CAMINHO),
                 file=file_content
