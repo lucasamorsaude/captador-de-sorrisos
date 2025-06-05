@@ -60,7 +60,7 @@ def gerar_relatorio(data_inicio=None, data_fim=None):
 
     driver = webdriver.Chrome(options=options)
     driver.maximize_window()
-    wait = WebDriverWait(driver, 20)
+    wait = WebDriverWait(driver, 40)
 
     try:
         print("🔐 Acessando login...")
@@ -80,23 +80,25 @@ def gerar_relatorio(data_inicio=None, data_fim=None):
 
 
         print("✅ Login feito, iniciando...")
-        WebDriverWait(driver, 10).until(
+        WebDriverWait(driver, 20).until(
             EC.element_to_be_clickable((By.XPATH, '/html/body/div[1]/div/div/div[3]/div[2]/ul/li[9]/a'))
         ).click()
 
+        driver.get("https://relatorios.webdentalsolucoes.io/index.php?rel=TDQzMDAwMDIwMjQwMjA2MTAxMDExOkwyNzQwMDAyMDIyMTIwMjA5MjAzOTpjbGluaWNhdG9kb3M6cmVsYXRvcmlvc19wYWNpZW50ZV90cmF0YW1lbnRvLnBocDo=&TB_iframe=true&height=350&width=480")
 
-        WebDriverWait(driver, 10).until(
-            EC.element_to_be_clickable((By.XPATH, '/html/body/div[1]/div/div/div[3]/div[1]/div/span/div/div[2]/div[16]'))
-        ).click()
+        
+        # WebDriverWait(driver, 20).until(
+        #     EC.element_to_be_clickable((By.XPATH, '/html/body/div[1]/div/div/div[3]/div[1]/div/span/div/div[2]/div[16]'))
+        # ).click()
 
-        WebDriverWait(driver, 10).until(
-            EC.frame_to_be_available_and_switch_to_it((By.ID, "TB_iframeContent"))
-        )
+        # WebDriverWait(driver, 50).until(
+        #     EC.frame_to_be_available_and_switch_to_it((By.ID, "TB_window"))
+        # )
 
         
 
         print("🗓️ Preenchendo datas...")
-        WebDriverWait(driver, 10).until(
+        WebDriverWait(driver, 30).until(
             EC.presence_of_element_located((By.ID, "dtini"))
         ).send_keys(formatar_data(data_inicio))
 
@@ -119,7 +121,7 @@ def gerar_relatorio(data_inicio=None, data_fim=None):
 
         print("📊 Gerando relatório...")
         driver.switch_to.window(driver.window_handles[-1])
-        time.sleep(10)
+        time.sleep(20)
 
         driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
@@ -195,4 +197,6 @@ def url_mensagem_whatsapp(numero, mensagem):
     mensagem = urllib.parse.quote(mensagem)
     return f"https://web.whatsapp.com/send?phone={numero}&text={mensagem}"
 
-gerar_relatorio()
+
+if __name__ == "__main__":
+    gerar_relatorio()
